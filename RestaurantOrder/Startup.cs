@@ -13,6 +13,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using RestaurantOrder.Models;
 using RestaurantOrder.Business;
+using RestaurantOrder.Services;
 
 namespace RestaurantOrder
 {
@@ -35,6 +36,7 @@ namespace RestaurantOrder
         );
       services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
       services.AddScoped<IOrderCreator, OrderCreator>();
+      services.AddScoped<IOrderService, OrderService>();
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
