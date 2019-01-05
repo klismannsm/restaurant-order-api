@@ -6,7 +6,7 @@
       "Microsoft": "Information"
     },
     "ConnectionStrings": {
-      "DefaultConnection": "Host=localhost;Port=5432;Username=postgres;Password=password;Database=restaurant_order_v1_dev;"
+      "DefaultConnection": "Sample"
     }
   }
 }
