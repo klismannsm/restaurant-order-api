@@ -41,5 +41,5 @@ Thumbs.db
 # dotCover
 *.dotCover
 
-appsettings.Development.json
-appsettings.json
+RestaurantOrder/appsettings.Development.json
+RestaurantOrder/appsettings.json
