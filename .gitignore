@@ -43,3 +43,4 @@ Thumbs.db
 
 RestaurantOrder/appsettings.Development.json
 RestaurantOrder/appsettings.json
+RestaurantOrder/.env

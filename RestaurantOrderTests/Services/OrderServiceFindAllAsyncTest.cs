@@ -3,16 +3,15 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Moq;
-using NUnit.Framework;
 using RestaurantOrder.Business;
 using RestaurantOrder.Enumerations;
 using RestaurantOrder.Models;
 using RestaurantOrder.Services;
 using RestaurantOrder.ViewModels;
+using Xunit;
 
-namespace Tests.Services
+namespace RestaurantOrderTests.Services
 {
-  [TestFixture]
   public class OrderService_FindAllAsyncShould
   {
     private IOrderService _orderService;
@@ -20,17 +19,17 @@ namespace Tests.Services
     public OrderService_FindAllAsyncShould()
     { }
 
-    [Test]
+    [Fact]
     public async Task ReturnOrders()
     {
       SetupTest();
       var result = await _orderService.FindAllAsync();
 
-      Assert.AreEqual(2, result.Count);
-      Assert.AreEqual("morning,1,2,3", result[0].Input);
-      Assert.AreEqual("morning, eggs, toast, coffee", result[0].Output);
-      Assert.AreEqual("night,1,2,3,4", result[1].Input);
-      Assert.AreEqual("night, steak, potato, wine, cake", result[1].Output);
+      Assert.Equal(2, result.Count);
+      Assert.Equal("morning,1,2,3", result[0].Input);
+      Assert.Equal("morning, eggs, toast, coffee", result[0].Output);
+      Assert.Equal("night,1,2,3,4", result[1].Input);
+      Assert.Equal("night, steak, potato, wine, cake", result[1].Output);
     }
 
     private void SetupTest()
