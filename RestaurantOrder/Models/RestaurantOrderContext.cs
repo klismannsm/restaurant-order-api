@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using RestaurantOrder.Enumerations;
 using RestaurantOrder.Models;
 
-namespace RestaurantOrderApi.Models
+namespace RestaurantOrder.Models
 {
   public class RestaurantOrderContext : DbContext
   {
