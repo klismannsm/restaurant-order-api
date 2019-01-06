@@ -22,6 +22,7 @@ namespace RestaurantOrder
     public Startup(IConfiguration configuration)
     {
       Configuration = configuration;
+      DotNetEnv.Env.Load();
     }
 
     public IConfiguration Configuration { get; }
@@ -35,8 +36,36 @@ namespace RestaurantOrder
           )
         );
       services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+      AddServices(services);
+      AddCors(services);
+    }
+
+    private void AddServices(IServiceCollection services)
+    {
       services.AddScoped<IOrderCreator, OrderCreator>();
       services.AddScoped<IOrderService, OrderService>();
+    }
+
+    private void AddCors(IServiceCollection services)
+    {
+      var allowedOrigins = Environment
+        .GetEnvironmentVariable("RESTAURANT_ORDER_API_ALLOWED_HOSTS");
+      if (allowedOrigins == null)
+      {
+        return;
+      }
+      services.AddCors(options =>
+        options.AddPolicy(
+          "AllowSpecificOrigins",
+          builder =>
+          {
+            builder
+              .WithOrigins(allowedOrigins.Split(','))
+              .AllowAnyMethod()
+              .AllowAnyHeader();
+          }
+        )
+      );
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
