@@ -1,14 +1,13 @@
 using System;
 using System.Collections.Generic;
-using NUnit.Framework;
 using RestaurantOrder.Business;
 using RestaurantOrder.Enumerations;
 using RestaurantOrder.Models;
 using RestaurantOrder.ViewModels;
+using Xunit;
 
-namespace RestaurantOrderTests.Business
+namespace RestaurantOrderFacts.Business
 {
-  [TestFixture]
   public class OrderCreator_CreateShould
   {
     private readonly IOrderCreator _orderCreator;
@@ -71,7 +70,7 @@ namespace RestaurantOrderTests.Business
       _orderCreator = new OrderCreator();
     }
 
-    [Test]
+    [Fact]
     public void ReturnDishesIfValidMorningInput()
     {
       var model = new PostOrderViewModel()
@@ -80,11 +79,11 @@ namespace RestaurantOrderTests.Business
       };
       var result = _orderCreator.Create(model, Dishes);
 
-      Assert.AreEqual(model.Input, result.Input);
-      Assert.AreEqual("morning, eggs, toast, coffee", result.Output);
+      Assert.Equal(model.Input, result.Input);
+      Assert.Equal("morning, eggs, toast, coffee", result.Output);
     }
 
-    [Test]
+    [Fact]
     public void ReturnDishesIfValidNightInput()
     {
       var model = new PostOrderViewModel()
@@ -93,11 +92,11 @@ namespace RestaurantOrderTests.Business
       };
       var result = _orderCreator.Create(model, Dishes);
 
-      Assert.AreEqual(model.Input, result.Input);
-      Assert.AreEqual("night, steak, potato, wine, cake", result.Output);
+      Assert.Equal(model.Input, result.Input);
+      Assert.Equal("night, steak, potato, wine, cake", result.Output);
     }
 
-    [Test]
+    [Fact]
     public void ReturnDishesIfUnorderedInputWasGiven()
     {
       var model = new PostOrderViewModel()
@@ -106,11 +105,11 @@ namespace RestaurantOrderTests.Business
       };
       var result = _orderCreator.Create(model, Dishes);
 
-      Assert.AreEqual(model.Input, result.Input);
-      Assert.AreEqual("night, steak, potato, wine, cake", result.Output);
+      Assert.Equal(model.Input, result.Input);
+      Assert.Equal("night, steak, potato, wine, cake", result.Output);
     }
 
-    [Test]
+    [Fact]
     public void ReturnErrorIfInvalidTimeOfDay()
     {
       var model = new PostOrderViewModel()
@@ -119,11 +118,11 @@ namespace RestaurantOrderTests.Business
       };
       var result = _orderCreator.Create(model, Dishes);
 
-      Assert.AreEqual(model.Input, result.Input);
-      Assert.AreEqual("error", result.Output);
+      Assert.Equal(model.Input, result.Input);
+      Assert.Equal("error", result.Output);
     }
 
-    [Test]
+    [Fact]
     public void ReturnErrorIfAskedForMoreEntriesInMorning()
     {
       var model = new PostOrderViewModel()
@@ -132,11 +131,11 @@ namespace RestaurantOrderTests.Business
       };
       var result = _orderCreator.Create(model, Dishes);
 
-      Assert.AreEqual(model.Input, result.Input);
-      Assert.AreEqual("morning, eggs, error", result.Output);
+      Assert.Equal(model.Input, result.Input);
+      Assert.Equal("morning, eggs, error", result.Output);
     }
 
-    [Test]
+    [Fact]
     public void ReturnErrorIfAskedForMoreSidesInMorning()
     {
       var model = new PostOrderViewModel()
@@ -145,11 +144,11 @@ namespace RestaurantOrderTests.Business
       };
       var result = _orderCreator.Create(model, Dishes);
 
-      Assert.AreEqual(model.Input, result.Input);
-      Assert.AreEqual("morning, eggs, toast, error", result.Output);
+      Assert.Equal(model.Input, result.Input);
+      Assert.Equal("morning, eggs, toast, error", result.Output);
     }
 
-    [Test]
+    [Fact]
     public void ReturnDishesIfAskedForMoreDrinksInMorning()
     {
       var model = new PostOrderViewModel()
@@ -158,11 +157,11 @@ namespace RestaurantOrderTests.Business
       };
       var result = _orderCreator.Create(model, Dishes);
 
-      Assert.AreEqual(model.Input, result.Input);
-      Assert.AreEqual("morning, eggs, toast, coffee(x3)", result.Output);
+      Assert.Equal(model.Input, result.Input);
+      Assert.Equal("morning, eggs, toast, coffee(x3)", result.Output);
     }
 
-    [Test]
+    [Fact]
     public void ReturnErrorIfAskedForMoreEntriesInNight()
     {
       var model = new PostOrderViewModel()
@@ -171,11 +170,11 @@ namespace RestaurantOrderTests.Business
       };
       var result = _orderCreator.Create(model, Dishes);
 
-      Assert.AreEqual(model.Input, result.Input);
-      Assert.AreEqual("night, steak, error", result.Output);
+      Assert.Equal(model.Input, result.Input);
+      Assert.Equal("night, steak, error", result.Output);
     }
 
-    [Test]
+    [Fact]
     public void ReturnDishesIfAskedForMoreSidesInNight()
     {
       var model = new PostOrderViewModel()
@@ -184,11 +183,11 @@ namespace RestaurantOrderTests.Business
       };
       var result = _orderCreator.Create(model, Dishes);
 
-      Assert.AreEqual(model.Input, result.Input);
-      Assert.AreEqual("night, steak, potato(x2), wine, cake", result.Output);
+      Assert.Equal(model.Input, result.Input);
+      Assert.Equal("night, steak, potato(x2), wine, cake", result.Output);
     }
 
-    [Test]
+    [Fact]
     public void ReturnErrorIfAskedForMoreDrinksInNight()
     {
       var model = new PostOrderViewModel()
@@ -197,11 +196,11 @@ namespace RestaurantOrderTests.Business
       };
       var result = _orderCreator.Create(model, Dishes);
 
-      Assert.AreEqual(model.Input, result.Input);
-      Assert.AreEqual("night, steak, potato, wine, error", result.Output);
+      Assert.Equal(model.Input, result.Input);
+      Assert.Equal("night, steak, potato, wine, error", result.Output);
     }
 
-    [Test]
+    [Fact]
     public void ReturnErrorIfAskedForMoreDessertsInNight()
     {
       var model = new PostOrderViewModel()
@@ -210,8 +209,8 @@ namespace RestaurantOrderTests.Business
       };
       var result = _orderCreator.Create(model, Dishes);
 
-      Assert.AreEqual(model.Input, result.Input);
-      Assert.AreEqual("night, steak, potato, wine, cake, error", result.Output);
+      Assert.Equal(model.Input, result.Input);
+      Assert.Equal("night, steak, potato, wine, cake, error", result.Output);
     }
   }
 }

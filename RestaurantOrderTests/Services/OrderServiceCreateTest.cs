@@ -3,16 +3,15 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Moq;
-using NUnit.Framework;
 using RestaurantOrder.Business;
 using RestaurantOrder.Enumerations;
 using RestaurantOrder.Models;
 using RestaurantOrder.Services;
 using RestaurantOrder.ViewModels;
+using Xunit;
 
-namespace Tests.Services
+namespace RestaurantOrderTests.Services
 {
-  [TestFixture]
   public class OrderService_CreateShould
   {
     private IOrderService _orderService;
@@ -75,7 +74,7 @@ namespace Tests.Services
       };
     }
 
-    [Test]
+    [Fact]
     public async Task ReturnOrder()
     {
       var model = new PostOrderViewModel()
@@ -90,8 +89,8 @@ namespace Tests.Services
       SetupTest(model, order);
       var result = await _orderService.Create(model);
 
-      Assert.AreEqual(model.Input, result.Input);
-      Assert.AreEqual(order.Output, result.Output);
+      Assert.Equal(model.Input, result.Input);
+      Assert.Equal(order.Output, result.Output);
     }
 
     private void SetupTest(PostOrderViewModel model, Order order)
